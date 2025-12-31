@@ -1,4 +1,4 @@
-﻿using Syncfusion.Maui.RichTextEditor;
+using Syncfusion.Maui.RichTextEditor;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -79,9 +79,9 @@ namespace RTEToolbar
         private void AddToolbarItem(RichTextToolbarOptions itemType)
         {
             // Check if item already exists
-            if (!richTextEditor.ToolbarItems.Any(item => item.Type == itemType))
+            if (!VM.ToolbarItems.Any(item => item.Type == itemType))
             {
-                richTextEditor.ToolbarItems.Add(new RichTextToolbarItem { Type = itemType });
+                VM.ToolbarItems.Add(new RichTextToolbarItem { Type = itemType });
             }
         }
 
@@ -90,10 +90,10 @@ namespace RTEToolbar
         /// </summary>
         private void RemoveToolbarItem(RichTextToolbarOptions itemType)
         {
-            var itemToRemove = richTextEditor.ToolbarItems.FirstOrDefault(item => item.Type == itemType);
+            var itemToRemove = VM.ToolbarItems.FirstOrDefault(item => item.Type == itemType);
             if (itemToRemove != null)
             {
-                richTextEditor.ToolbarItems.Remove(itemToRemove);
+                VM.ToolbarItems.Remove(itemToRemove);
             }
         }
 
@@ -102,7 +102,7 @@ namespace RTEToolbar
         /// </summary>
         private void OnClearAllClicked(object? sender, EventArgs e)
         {
-            richTextEditor.ToolbarItems.Clear();
+            VM.ToolbarItems.Clear();
             
             // Uncheck all checkboxes
             chkStrikethrough.IsChecked = false;
@@ -129,15 +129,15 @@ namespace RTEToolbar
         /// </summary>
         private void OnResetToDefaultClicked(object? sender, EventArgs e)
         {
-            richTextEditor.ToolbarItems.Clear();
+            VM.ToolbarItems.Clear();
             
             // Add default items
-            richTextEditor.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.Bold });
-            richTextEditor.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.Italic });
-            richTextEditor.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.Underline });
-            richTextEditor.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.Separator });
-            richTextEditor.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.NumberList });
-            richTextEditor.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.BulletList });
+            VM.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.Bold });
+            VM.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.Italic });
+            VM.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.Underline });
+            VM.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.Separator });
+            VM.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.NumberList });
+            VM.ToolbarItems.Add(new RichTextToolbarItem { Type = RichTextToolbarOptions.BulletList });
 
             // Reset checkboxes
             chkStrikethrough.IsChecked = false;
@@ -164,7 +164,7 @@ namespace RTEToolbar
         /// </summary>
         private void UpdateItemCount()
         {
-            lblItemCount.Text = $"Current Item Count: {richTextEditor.ToolbarItems.Count}";
+            lblItemCount.Text = $"Current Item Count: {VM.ToolbarItems.Count}";
         }
 
         /// <summary>
@@ -174,9 +174,9 @@ namespace RTEToolbar
         {
             pickerToolbarItems.Items.Clear();
             
-            for (int i = 0; i < richTextEditor.ToolbarItems.Count; i++)
+            for (int i = 0; i < VM.ToolbarItems.Count; i++)
             {
-                var item = richTextEditor.ToolbarItems[i];
+                var item = VM.ToolbarItems[i];
                 pickerToolbarItems.Items.Add($"{i + 1}. {item.Type}");
             }
 
@@ -198,7 +198,7 @@ namespace RTEToolbar
             {
                 // Enable/disable move buttons based on position
                 btnMoveLeft.IsEnabled = pickerToolbarItems.SelectedIndex > 0;
-                btnMoveRight.IsEnabled = pickerToolbarItems.SelectedIndex < richTextEditor.ToolbarItems.Count - 1;
+                btnMoveRight.IsEnabled = pickerToolbarItems.SelectedIndex < VM.ToolbarItems.Count - 1;
             }
             else
             {
@@ -216,9 +216,9 @@ namespace RTEToolbar
             
             if (selectedIndex > 0)
             {
-                var item = richTextEditor.ToolbarItems[selectedIndex];
-                richTextEditor.ToolbarItems.RemoveAt(selectedIndex);
-                richTextEditor.ToolbarItems.Insert(selectedIndex - 1, item);
+                var item = VM.ToolbarItems[selectedIndex];
+                VM.ToolbarItems.RemoveAt(selectedIndex);
+                VM.ToolbarItems.Insert(selectedIndex - 1, item);
                 
                 UpdatePickerItems();
                 pickerToolbarItems.SelectedIndex = selectedIndex - 1;
@@ -232,46 +232,15 @@ namespace RTEToolbar
         {
             int selectedIndex = pickerToolbarItems.SelectedIndex;
             
-            if (selectedIndex >= 0 && selectedIndex < richTextEditor.ToolbarItems.Count - 1)
+            if (selectedIndex >= 0 && selectedIndex < VM.ToolbarItems.Count - 1)
             {
-                var item = richTextEditor.ToolbarItems[selectedIndex];
-                richTextEditor.ToolbarItems.RemoveAt(selectedIndex);
-                richTextEditor.ToolbarItems.Insert(selectedIndex + 1, item);
+                var item = VM.ToolbarItems[selectedIndex];
+                VM.ToolbarItems.RemoveAt(selectedIndex);
+                VM.ToolbarItems.Insert(selectedIndex + 1, item);
                 
                 UpdatePickerItems();
                 pickerToolbarItems.SelectedIndex = selectedIndex + 1;
             }
         }
-    }
-
-    public class ViewModel : INotifyPropertyChanged
-    {
-        private string _mailContent = string.Empty;
-        /// <summary>
-        /// Gets or sets the content of the mail.
-        /// </summary>
-        public string MailContent
-        {
-            get => _mailContent;
-            set
-            {
-                _mailContent = value;
-                OnPropertyChanged(nameof(MailContent));
-            }
-        }
-
-        public ViewModel()
-        {
-            MailContent = @"<p><strong>Hello Frank,</strong></p><p>I hope you're doing well. I'm writing to follow up on our recent conversation regarding <strong>MAUI control development</strong>.</p><p>Here’s a quick summary of the agenda:</p><ul><li>✅ Kickoff completed successfully</li><li>📌 Deliverables in progress</li><li>💬 Weekly sync scheduled</li></ul><p><strong>Detailed Task Overview:</strong></p><table border='1' cellpadding='5' cellspacing='0' style='border-collapse:collapse;'><tr><th>Task</th><th>Owner</th><th>Due Date</th><th>Status</th></tr><tr><td>Kickoff Meeting</td><td>Project Lead</td><td>August 19</td><td>✅ Completed</td></tr><tr><td>Deliverables Review</td><td>Dev Team</td><td>September 30</td><td>🔄 In Progress</td></tr><tr><td>Weekly Sync</td><td>All Members</td><td>Every Tuesday</td><td>📅 Scheduled</td></tr></table><p style='margin-top:20px; margin-bottom:20px;'>If you need more details, feel free to reach out. I’ll be happy to provide any additional information you need.</p><p>Best regards,<br/><strong>Ivy</strong><br/>Technical Project Coordinator</p>";
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        /// <summary>
-        /// Triggers the PropertyChanged event.
-        /// </summary>
-        /// <param name="name">The property name that changed.</param>
-        protected void OnPropertyChanged(string name) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
