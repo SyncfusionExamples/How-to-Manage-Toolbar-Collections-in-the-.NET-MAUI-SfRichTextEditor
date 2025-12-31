@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rte="clr-namespace:Syncfusion.Maui.RichTextEditor;assembly=Syncfusion.Maui.RichTextEditor"
+             x:Class="RTEToolbar.MainPage"
+             xmlns:local="clr-namespace:RTEToolbar">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel/>
+    </ContentPage.BindingContext>
+    <Grid Padding="10,30,10,10" RowDefinitions="*,19*" ColumnDefinitions="8*,3*" >
+
+        <Label Text="RichTextEditor Toolbar Management" FontSize="Large" FontFamily="Calibri" FontAttributes="Bold"/>
+
+        <rte:SfRichTextEditor x:Name="richTextEditor"  Grid.Column="0" Grid.Row="1" HtmlText="{Binding MailContent}">
+            <rte:SfRichTextEditor.ToolbarItems>
+                <!-- Initial Toolbar Items -->
+                <rte:RichTextToolbarItem Type="Bold" />
+                <rte:RichTextToolbarItem Type="Italic" />
+                <rte:RichTextToolbarItem Type="Underline" />
+                <rte:RichTextToolbarItem Type="Separator" />
+                <rte:RichTextToolbarItem Type="NumberList" />
+                <rte:RichTextToolbarItem Type="BulletList" />
+            </rte:SfRichTextEditor.ToolbarItems>
+        </rte:SfRichTextEditor>
+
+
+        <!-- Control Panel -->
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" RowDefinitions="*,*" RowSpacing="10">
+
+            <!-- Add/Remove Items Section -->
+            <Border Stroke="LightGray" 
+StrokeShape="RoundRectangle 5" 
+Padding="10"
+Margin="5,0,0,5">
+
+                <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never">
+                <VerticalStackLayout Spacing="10" >
+
+                    <!-- Section Header -->
+                    <Label Text="Toolbar Item Controls" 
+           FontSize="18" 
+           FontAttributes="Bold"
+           Margin="0,0,0,10"/>
+
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Add/Remove Toolbar Items:" 
+                   FontSize="16" 
+                   FontAttributes="Bold"/>
+
+                            <Grid ColumnDefinitions="*,*" 
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
+                  ColumnSpacing="10" 
+                  RowSpacing="5">
+
+                                <!-- Row 0 -->
+                                <CheckBox x:Name="chkStrikethrough" 
+                          Grid.Row="0" Grid.Column="0"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="Strikethrough" 
+                       Grid.Row="0" Grid.Column="0" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <CheckBox x:Name="chkFontSize" 
+                          Grid.Row="0" Grid.Column="1"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="FontSize" 
+                       Grid.Row="0" Grid.Column="1" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <!-- Row 1 -->
+                                <CheckBox x:Name="chkSubScript" 
+                          Grid.Row="1" Grid.Column="0"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="SubScript" 
+                       Grid.Row="1" Grid.Column="0" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <CheckBox x:Name="chkSuperScript" 
+                          Grid.Row="1" Grid.Column="1"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="SuperScript" 
+                       Grid.Row="1" Grid.Column="1" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <!-- Row 2 -->
+                                <CheckBox x:Name="chkFontFamily" 
+                          Grid.Row="2" Grid.Column="0"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="FontFamily" 
+                       Grid.Row="2" Grid.Column="0" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <CheckBox x:Name="chkTextColor" 
+                          Grid.Row="2" Grid.Column="1"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="TextColor" 
+                       Grid.Row="2" Grid.Column="1" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <!-- Row 3 -->
+                                <CheckBox x:Name="chkHighlightColor" 
+                          Grid.Row="3" Grid.Column="0"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="HighlightColor" 
+                       Grid.Row="3" Grid.Column="0" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <CheckBox x:Name="chkAlignment" 
+                          Grid.Row="3" Grid.Column="1"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="Alignment" 
+                       Grid.Row="3" Grid.Column="1" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <!-- Row 4 -->
+                                <CheckBox x:Name="chkIncreaseIndent" 
+                          Grid.Row="4" Grid.Column="0"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="IncreaseIndent" 
+                       Grid.Row="4" Grid.Column="0" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <CheckBox x:Name="chkDecreaseIndent" 
+                          Grid.Row="4" Grid.Column="1"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="DecreaseIndent" 
+                       Grid.Row="4" Grid.Column="1" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <!-- Row 5 -->
+                                <CheckBox x:Name="chkHyperlink" 
+                          Grid.Row="5" Grid.Column="0"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="Hyperlink" 
+                       Grid.Row="5" Grid.Column="0" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <CheckBox x:Name="chkImage" 
+                          Grid.Row="5" Grid.Column="1"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="Image" 
+                       Grid.Row="5" Grid.Column="1" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <!-- Row 6 -->
+                                <CheckBox x:Name="chkTable" 
+                          Grid.Row="6" Grid.Column="0"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="Table" 
+                       Grid.Row="6" Grid.Column="0" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+
+                                <CheckBox x:Name="chkUndoRedo" 
+                          Grid.Row="6" Grid.Column="1"
+                          CheckedChanged="OnToolbarItemCheckedChanged"/>
+                                <Label Text="Undo/Redo" 
+                       Grid.Row="6" Grid.Column="1" 
+                       Margin="40,0,0,0"
+                       VerticalOptions="Center"/>
+                            </Grid>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+
+            
+                </ScrollView>
+            </Border>
+
+            <!-- Collection Operations Section -->
+            <Border Stroke="LightGray"  Grid.Row="1"
+StrokeShape="RoundRectangle 5" 
+Padding="10"
+Margin="5,0,0,5">
+
+                <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+
+                <VerticalStackLayout Padding="5" Spacing="10">
+
+
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Collection Operations:" 
+        FontSize="16" 
+        FontAttributes="Bold"/>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" RowSpacing="10">
+                                <Button Grid.Column="0"
+             Text="Clear All Items"
+             Clicked="OnClearAllClicked"
+             BackgroundColor="#FF6B6B"/>
+
+                                <Button Grid.Column="1"
+             Text="Reset to Default"
+             Clicked="OnResetToDefaultClicked"
+             BackgroundColor="#4ECDC4"/>
+                            </Grid>
+
+                            <Label x:Name="lblItemCount" 
+        Text="Current Item Count: 6"
+        FontSize="14"
+        HorizontalOptions="Center"
+        Margin="0,10,0,0"/>
+                        </VerticalStackLayout>
+
+                        <BoxView HeightRequest="2" Color="LightGray"/>
+
+                        <VerticalStackLayout Spacing="10" Grid.Row="2">
+                            <Label Text="Reorder Toolbar Items:" 
+        FontSize="16" 
+        FontAttributes="Bold"/>
+
+                            <Label Text="Select an item and move it:"
+        FontSize="12"
+        TextColor="Gray"/>
+
+                            <Picker x:Name="pickerToolbarItems"
+         Title="Select Item to Move"
+         SelectedIndexChanged="OnPickerSelectedIndexChanged"/>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                <Button Grid.Column="0"
+             x:Name="btnMoveLeft"
+             Text="Move Left ←"
+             Clicked="OnMoveLeftClicked"
+             IsEnabled="False"
+             BackgroundColor="#95E1D3"/>
+
+                                <Button Grid.Column="1"
+             x:Name="btnMoveRight"
+             Text="Move Right →"
+             Clicked="OnMoveRightClicked"
+             IsEnabled="False"
+             BackgroundColor="#95E1D3"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                   
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            </Border>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>
