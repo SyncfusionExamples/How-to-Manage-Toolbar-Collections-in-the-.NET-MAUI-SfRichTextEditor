@@ -28,4 +28,4 @@ This sample demonstrates how to dynamically add, remove, clear, and reorder tool
 ## Troubleshooting
 If you are facing a path too long exception when building this example project, close Visual Studio and rename the repository to short and build the project.
 
-For a step-by-step procedure, refer to the [How to Manage Toolbar Collections in the MAUI SfRichTextEditor??](https://support.syncfusion.com/kb/article/22324/how-to-manage-toolbar-collections-in-the-maui-sfrichtexteditor) KB article.
+For a step-by-step procedure, refer to the [How to Manage Toolbar Collections in the MAUI SfRichTextEditor?](https://support.syncfusion.com/kb/article/22324/how-to-manage-toolbar-collections-in-the-maui-sfrichtexteditor) KB article.
