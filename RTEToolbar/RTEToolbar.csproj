@@ -60,7 +60,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0"/>
-		<PackageReference Include="Syncfusion.Maui.RichTextEditor" Version="32.1.21"/>
+		<PackageReference Include="Syncfusion.Maui.RichTextEditor" Version="*"/>
 	</ItemGroup>
 
 </Project>
