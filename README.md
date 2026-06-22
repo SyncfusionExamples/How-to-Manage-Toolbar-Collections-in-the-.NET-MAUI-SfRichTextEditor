@@ -1,5 +1,5 @@
 # How to Manage Toolbar Collections in the .NET MAUI SfRichTextEditor
-This sample demonstrates how to dynamically add, remove, clear, and reorder toolbar items in the .NET MAUI SfRichTextEditor using Syncfusion controls. Customize the editing experience to match your app’s workflow and keep the UI focused on what users need.
+This sample demonstrates how to dynamically add, remove, clear, and reorder toolbar items in the [.NET MAUI SfRichTextEditor](https://www.syncfusion.com/maui-controls/maui-rich-text-editor) using Syncfusion controls. Customize the editing experience to match your app’s workflow and keep the UI focused on what users need.
 
 ## What You'll Learn
 
